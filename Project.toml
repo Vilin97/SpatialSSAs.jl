@@ -1,0 +1,14 @@
+name = "SpatialSSAs"
+uuid = "d67842e0-5e49-11e9-238b-db3b805b784c"
+authors = ["Vilin97 <vasilin97@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+DiffEqBiological = "eb300fae-53e8-50a0-950c-e21f52c2b7e0"
+DiffEqJump = "c894b116-72e5-5b58-be3c-e6d8d4ac2b12"
+DiffEqProblemLibrary = "a077e3f3-b75c-5d7f-a0c6-6bc4c8ec64a9"
+Parameters = "d96e819e-fc66-5662-9728-84c9c7592b0a"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+RandomNumbers = "e6cf234a-135c-5ec9-84dd-332b85af5143"
+ReactionNetworkImporters = "b4db0fb7-de2a-5028-82bf-5021f5cfa881"
