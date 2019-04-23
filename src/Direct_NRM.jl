@@ -6,8 +6,7 @@ function dm_nrm_solve(spatial_jump_prob, method="Direct"; times=nothing)
 end
 
 function dm_nrm_do_setup(spatial_jump_prob, method, times)
-    jump_prob = spatial_jump_prob.jump_prob
-    initial_state = spatial_jump_prob.initial_state
+    @unpack jump_prob, initial_state = spatial_jump_prob
     @unpack massaction_jump = jump_prob
     @unpack u0 = jump_prob.prob
     t0 = jump_prob.prob.tspan[1]

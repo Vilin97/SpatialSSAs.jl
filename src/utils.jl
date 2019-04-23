@@ -1,4 +1,4 @@
-using ReactionNetworkImporters, Random, DiffEqProblemLibrary.JumpProblemLibrary, RandomNumbers.Xorshifts, DiffEqJump, Parameters
+using Random, DiffEqProblemLibrary.JumpProblemLibrary, RandomNumbers.Xorshifts, DiffEqJump, Parameters
 
 struct SpatialJumpProb{J, I, F, S, M1, M2}
     jump_prob::J
@@ -143,7 +143,20 @@ function dna_spatial(box_width = 21, dimension = 1, diff_const = 10^-4)
     vol_num = box_width^dimension
     N = length(jump_prob.prob.u0)
     initial_state = [zeros(Int,N) for i in 1:vol_num]
-    c = div(vol_num,2)+1
+    m = div(box_width+1,2)
+    if dimension==1 || dimension>3 c = div(vol_num+1,2) elseif dimension==2 c = phi_inverse(m,m,1,box_width) elseif dimension==3 c = phi_inverse(m,m,m,box_width) end
+    initial_state[c] = jump_prob.prob.u0
+    return get_spatial_jump_prob(jump_prob, box_width, dimension, diff_const, stationary_species, initial_state)
+end
+
+function multistate_spatial(box_width = 21, dimension = 1, diff_const = 10^-3)
+    jump_prob = multi_jump_prob(Direct())
+    stationary_species = Set(Int[])
+    vol_num = box_width^dimension
+    N = length(jump_prob.prob.u0)
+    initial_state = [zeros(Int,N) for i in 1:vol_num]
+    m = div(box_width+1,2)
+    if dimension==1 || dimension>3 c = div(vol_num+1,2) elseif dimension==2 c = phi_inverse(m,m,1,box_width) elseif dimension==3 c = phi_inverse(m,m,m,box_width) end
     initial_state[c] = jump_prob.prob.u0
     return get_spatial_jump_prob(jump_prob, box_width, dimension, diff_const, stationary_species, initial_state)
 end
