@@ -107,7 +107,7 @@ function dm_nrm_run_simulation(spatial_jump_prob, method, dep_graph, times, stat
         end
         record_state!(states, save_all_jumps, state, times, t, idx)
     end
-    #println("number of reactions: $rx_counter. number of diffusions: $diff_counter")
+    println("number of reactions: $rx_counter. number of diffusions: $diff_counter")
     fill_states!(states,save_all_jumps,state,times,idx)
     return times, states
 end

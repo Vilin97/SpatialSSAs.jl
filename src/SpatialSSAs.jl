@@ -1,6 +1,6 @@
 module SpatialSSAs
 
-export my_solve, get_rx_props, get_diff_props
+export my_solve
 
 include("utils.jl")
 #include("RSSA.jl")

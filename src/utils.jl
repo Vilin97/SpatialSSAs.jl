@@ -41,16 +41,14 @@ function diff_update_props!(vol_rates, vol_rx_rates, vol_diff_rates, rx_matrix, 
         vol_rx_rates[d] += (prop - old_prop)
     end
 
-    L = L_vecs[length(connectivity_matrix[j])]
     old_prop = diff_matrix[j][n]
-    prop = L * diff_rate * state[j][n]
+    prop = L_vecs[length(connectivity_matrix[j])] * diff_rate * state[j][n]
     diff_matrix[j][n] = prop
     vol_diff_rates[j] += (prop - old_prop)
     vol_rates[j] = vol_rx_rates[j] + vol_diff_rates[j]
 
-    L = L_vecs[length(connectivity_matrix[d])]
     old_prop = diff_matrix[d][n]
-    prop = L * diff_rate * state[d][n]
+    prop = L_vecs[length(connectivity_matrix[d])] * diff_rate * state[d][n]
     diff_matrix[d][n] = prop
     vol_diff_rates[d] += (prop - old_prop)
     vol_rates[d] = vol_rx_rates[d] + vol_diff_rates[d]
@@ -69,12 +67,12 @@ end
 
 function record_state!(states, save_all_jumps,state,times,t,idx)
     if save_all_jumps
-        push!(states, copy(state))
+        push!(states, deepcopy(state))
         push!(times, t)
     else
         temp = idx[1]
         while temp <= length(times) && times[temp] < t
-            states[temp] = copy(state)
+            states[temp] = deepcopy(state)
             temp += 1
         end
         idx[1] = temp
@@ -82,7 +80,7 @@ function record_state!(states, save_all_jumps,state,times,t,idx)
 end
 
 function fill_states!(states,save_all_jumps,state,times,idx)
-    if save_all_jumps
+    if !save_all_jumps
         temp = idx[1]
         while temp < length(times)
             states[idx] = state
