@@ -1,2 +1,2 @@
 # SpatialSSAs.jl
-Implementation of Spatial Direct Method and Next Subvolume Method. Includes benchmarking.
+Simple stand-alone implementation of Spatial Direct Method and Next Subvolume Method. Includes benchmarking.
